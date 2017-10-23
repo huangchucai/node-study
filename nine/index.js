@@ -18,9 +18,11 @@ function setHttp(url) {
   })
 }
 
+
+
 // [[Function], [Function]]
 
-
+// 按顺序执行函数
 function main() {
   let promise = Promise.resolve();
   let arrData = []
@@ -32,15 +34,32 @@ function main() {
   },promise)
 }
 
+// 按顺序执行函数
+async function main2() {
+  let arrData = [];
+  for(const url of pathArr) {
+    const res = await setHttp(url);
+    // console.log(`${res}`)
+    arrData.push(res)
+  }
+  return arrData
+} 
 
+// 并发运行
 
-main().then((arr) => {
-  arr.forEach(item => {
+main2().then(data => {
+  data.forEach(item => {
     console.log(item);
   })
-}).catch((e) => {
-  console.log(e)
 })
+
+// main().then((arr) => {
+//   arr.forEach(item => {
+//     console.log(item);
+//   })
+// }).catch((e) => {
+//   console.log(e)
+// })
 
 
 // 官方答案
